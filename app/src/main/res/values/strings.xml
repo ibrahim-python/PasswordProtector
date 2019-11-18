@@ -1,0 +1,16 @@
+<resources>
+    <string name="app_name">Password Protector</string>
+    <string name="password">Password</string>
+    <string name="enter">Enter</string>
+     <string name="welcome">Welcome</string>
+    <string name="register">Register</string>
+    <string name="hint_password">Password...</string>
+    <string name="hint_username">Username...</string>
+    <string name="hint_website">Website...</string>
+    <string name="button_save">Save</string>
+    <string name="button_update">Update</string>
+    <string name="empty_not_saved">Word not saved because it is empty.</string>
+
+
+
+</resources>
