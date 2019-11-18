@@ -31,7 +31,8 @@ public class PassWordListAdapter extends RecyclerView.Adapter<PassWordListAdapte
     @Override
     public void onBindViewHolder(WordViewHolder holder, int position) {
         PassWord current = mPassWords.get(position);
-        holder.passwordView.setText(current.getUsername());
+        holder.username.setText(current.getUsername());
+        holder.website.setText(current.getWebsite());
 
     }
 
@@ -55,7 +56,9 @@ public class PassWordListAdapter extends RecyclerView.Adapter<PassWordListAdapte
 
     class WordViewHolder extends RecyclerView.ViewHolder {
 
-        TextView passwordView;
+        TextView username;
+        TextView website;
+
 
 
         /**
@@ -66,7 +69,8 @@ public class PassWordListAdapter extends RecyclerView.Adapter<PassWordListAdapte
         public WordViewHolder(View itemView) {
             super(itemView);
 
-            passwordView = itemView.findViewById(R.id.textView);
+            username = itemView.findViewById(R.id.textView);
+            website = itemView.findViewById(R.id.textView1);
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
