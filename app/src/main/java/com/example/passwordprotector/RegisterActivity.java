@@ -4,21 +4,22 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.passwordprotector.database.Master;
 import com.example.passwordprotector.database.MasterRepository;
 
+import java.security.NoSuchAlgorithmException;
+import java.security.NoSuchProviderException;
+import java.security.SecureRandom;
+
 public class RegisterActivity extends AppCompatActivity {
 
     EditText master1,master2;
     Button b2;
-    private static final String TAG = RegisterActivity.class.getSimpleName();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,9 +40,9 @@ public class RegisterActivity extends AppCompatActivity {
                 if(master1.getText().toString().equals(master2.getText().toString()) && !TextUtils.isEmpty(master1.getText())) {
 
                     String masterpass = master1.getText().toString();
-                    Master master = new Master(masterpass);
-//                  Log.d(TAG, master.getMMaster());
-
+                    byte[] salt = SecureMasterPassword.getSalt();
+                    String securedPassword = SecureMasterPassword.getSecuredpassword(masterpass,salt);
+                    Master master = new Master(securedPassword);
                     mRepo.insert(master);
                     startActivity(newpage);
                 }else{
@@ -50,4 +51,5 @@ public class RegisterActivity extends AppCompatActivity {
             }
         });
     }
+
 }

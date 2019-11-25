@@ -14,6 +14,8 @@ public class LoginActivity extends AppCompatActivity {
 
     Button b1;
     EditText edit_enter_password;
+    String loginPassword, hashPassword;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -21,6 +23,7 @@ public class LoginActivity extends AppCompatActivity {
 
         b1 = (Button)findViewById(R.id.enter_button);
         edit_enter_password = (EditText)findViewById(R.id.enter_password);
+
         final Intent newpage = new Intent(this, PassWordActivity.class);
         final MasterRepository mRepo = new MasterRepository(getApplication());
 
@@ -28,7 +31,10 @@ public class LoginActivity extends AppCompatActivity {
         b1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(edit_enter_password.getText().toString().equals(mRepo.getMainpassword())) {
+                loginPassword = edit_enter_password.getText().toString();
+                byte[] salt = SecureMasterPassword.getSalt();
+                hashPassword = SecureMasterPassword.getSecuredpassword(loginPassword,salt);
+                if(hashPassword.equals(mRepo.getMainpassword())) {
                     startActivity(newpage);
                     finish();
                 }else{
