@@ -12,17 +12,14 @@ public class SecureMasterPassword {
         byte[] salt = new byte[16];
 
         try {
-            SecureRandom sr = SecureRandom.getInstance("SHA1PRNG", "SUN");
+            SecureRandom sr = SecureRandom.getInstance("SHA1PRNG");
             sr.nextBytes(salt);
         }
         catch (NoSuchAlgorithmException e) {
             e.printStackTrace();
 
         }
-        catch(NoSuchProviderException e){
-            e.printStackTrace();
 
-        }
         return salt;
 
     }

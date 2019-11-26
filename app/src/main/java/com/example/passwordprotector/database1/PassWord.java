@@ -11,12 +11,12 @@ public class PassWord {
     @PrimaryKey(autoGenerate = true)
     private int id;
     private String username;
-    private String password;
+    private byte[] password;
     private String website;
 
 
 
-    public PassWord(String username,String password,String website) {
+    public PassWord(String username,byte[] password,String website) {
         this.username = username;
         this.password = password;
         this.website = website;
@@ -29,7 +29,7 @@ public class PassWord {
     }
     public Integer getId(){return id;}
     public String getUsername(){return username;}
-    public String getPassword(){return password;}
+    public byte[] getPassword(){return password;}
     public String getWebsite(){return website;}
 
 }

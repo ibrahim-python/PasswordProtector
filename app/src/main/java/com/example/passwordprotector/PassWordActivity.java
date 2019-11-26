@@ -11,6 +11,7 @@ import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.helper.ItemTouchHelper;
+import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
@@ -28,7 +29,6 @@ public class PassWordActivity extends AppCompatActivity {
 
     public static final int EDIT_WORD_REQUEST = 2;
     private RecyclerView mRecyclerView;
-    private static final String TAG = PassWordActivity.class.getSimpleName();
 
 
     @Override
@@ -96,7 +96,7 @@ public class PassWordActivity extends AppCompatActivity {
 
         if (requestCode == NEW_WORD_ACTIVITY_REQUEST_CODE && resultCode == RESULT_OK) {
             String username =data.getStringExtra(PassWordEditActivity.EXTRA_USERNAME);
-            String password =data.getStringExtra(PassWordEditActivity.EXTRA_PASSWORD);
+            byte[] password =data.getByteArrayExtra(PassWordEditActivity.EXTRA_PASSWORD);
             String website =data.getStringExtra(PassWordEditActivity.EXTRA_WEBSITE);
 
             PassWord word = new PassWord(username,password,website);
@@ -112,7 +112,7 @@ public class PassWordActivity extends AppCompatActivity {
             }
 
             String username =data.getStringExtra(PassWordEditActivity.EXTRA_USERNAME);
-            String password =data.getStringExtra(PassWordEditActivity.EXTRA_PASSWORD);
+            byte[] password =data.getByteArrayExtra(PassWordEditActivity.EXTRA_PASSWORD);
             String website =data.getStringExtra(PassWordEditActivity.EXTRA_WEBSITE);
 
             PassWord word = new PassWord(username,password,website);

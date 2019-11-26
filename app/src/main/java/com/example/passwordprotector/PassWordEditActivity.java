@@ -48,7 +48,19 @@ public class PassWordEditActivity extends AppCompatActivity {
         if (receivedIntent != null && receivedIntent.hasExtra(EXTRA_USERNAME)) {
             button.setText(R.string.button_update);
             mEditUsername.setText(receivedIntent.getStringExtra(EXTRA_USERNAME));
-            mEditPassword.setText(receivedIntent.getStringExtra(EXTRA_PASSWORD));
+            byte[] password1 =  receivedIntent.getByteArrayExtra(EXTRA_PASSWORD);
+
+            try{
+                byte[] originalPassword = PasswordEncryptDecrypt.decrypt(PasswordEncryptDecrypt.generateKey("hehehehe33131"),password1);
+                mEditPassword.setText(new String(originalPassword));
+                Log.v("origin", "3");
+
+
+            }
+            catch (Exception e) {
+                e.printStackTrace();
+            }
+
             mEditWebsite.setText(receivedIntent.getStringExtra(EXTRA_WEBSITE));
 
 
@@ -74,10 +86,17 @@ public class PassWordEditActivity extends AppCompatActivity {
                     String username = mEditUsername.getText().toString();
                     String password = mEditPassword.getText().toString();
                     String website = mEditWebsite.getText().toString();
-
+                    byte[] encryptedPassword;
 
                     replyIntent.putExtra(EXTRA_USERNAME, username);
-                    replyIntent.putExtra(EXTRA_PASSWORD, password);
+                    try{
+                        encryptedPassword = PasswordEncryptDecrypt.encrypt(PasswordEncryptDecrypt.generateKey("hehehehe33131"),password.getBytes());
+                        replyIntent.putExtra(EXTRA_PASSWORD, encryptedPassword);
+
+                    }
+                    catch (Exception e) {
+                        e.printStackTrace();
+                    }
                     replyIntent.putExtra(EXTRA_WEBSITE, website);
 
                     int id = getIntent().getIntExtra(EXTRA_ID, -1);
@@ -88,7 +107,6 @@ public class PassWordEditActivity extends AppCompatActivity {
 
                     }
 
-                    Log.d(TAG, String.valueOf(id));
                     setResult(RESULT_OK, replyIntent);
 
                 }
