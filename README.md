@@ -3,7 +3,4 @@ The goal of this app is to save,secure and display a list of passwords from diff
 It is essentially and open source keypass app
 
 
-![Passwords display page](app/src/main/res/drawable-v24/20191118_083910.png)
-![Password edit page](app/src/main/res/drawable-v24/20191118_083922.png)
-![Login page](app/src/main/res/drawable-v24/20191118_083937.png)
-![Master password registration page](app/src/main/res/drawable-v24/20191118_084052.png)
+It uses hashing and salting to secure the master password and simple AES for the stored passwords.
